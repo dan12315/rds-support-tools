@@ -38,10 +38,13 @@ def create_filter_and_metric(metric_name, filter_group_name, instance_name):
         filterPattern=return_filter_pattern(),
         metricTransformations=[
             {
-                'metricName': rds_instance_name + '_' + metric_name[2:],
+                'metricName': metric_name[2:],
                 'metricNamespace': metric_namespace,
-                'metricValue': metric_name
-            },
+                'metricValue': metric_name,
+                'dimensions' : {
+                    'DBInstanceIdentifier':'$.instanceID'
+                }
+            }
         ]
     )
 
